@@ -1,1 +1,1103 @@
+<!DOCTYPE html>
 
+<html lang="mr">
+
+<head>
+
+  <base target="_top">
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Photography Booking Manager</title>
+
+  <style>
+
+/* Booking Calendar */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0;
+  font-size: 12px;
+}
+
+.calendar-day {
+  min-height: 65px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 5px;
+  background: #16a34a;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.calendar-day.booked {
+  background: #dc2626;
+}
+
+.calendar-day.past-booked {
+  background: #64748b;
+  color: white;
+}
+
+.calendar-day.today {
+  background: #eab308;
+  color: #172554;
+}
+
+.calendar-day.selected {
+  outline: 3px solid #172554;
+}
+
+.calendar-day:disabled {
+  visibility: hidden;
+}
+
+.calendar-day small {
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.calendar-details {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media(max-width:600px) {
+  .calendar-grid { gap: 3px; }
+  .calendar-day {
+    min-height: 52px;
+    padding: 3px;
+    font-size: 12px;
+  }
+  .calendar-day small { font-size: 9px; }
+}
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      padding: 16px;
+
+      font-family: Arial, sans-serif;
+
+      background: #f1f5f9;
+
+      color: #172554;
+
+    }
+
+    .container { max-width: 950px; margin: auto; }
+
+    header {
+
+      background: #172554;
+
+      color: white;
+
+      padding: 22px;
+
+      border-radius: 14px;
+
+      margin-bottom: 18px;
+
+      text-align: center;
+
+    }
+
+    header h2 { margin: 0 0 7px; }
+
+    .stats {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 10px;
+
+      margin-bottom: 18px;
+
+    }
+
+    .stat, .panel {
+
+      background: white;
+
+      border-radius: 12px;
+
+      padding: 15px;
+
+      box-shadow: 0 2px 8px #0000000c;
+
+    }
+
+    .stat strong { display: block; font-size: 21px; margin-top: 8px; }
+
+    .panel { margin-bottom: 18px; }
+
+    h3 { margin-top: 0; }
+
+    .form-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 13px;
+
+    }
+
+    label { display: block; font-weight: bold; font-size: 14px; }
+
+    input, select {
+
+      width: 100%;
+
+      padding: 12px;
+
+      margin-top: 6px;
+
+      border: 1px solid #cbd5e1;
+
+      border-radius: 8px;
+
+      font-size: 16px;
+
+      background: white;
+
+    }
+
+    button {
+
+      border: 0;
+
+      border-radius: 8px;
+
+      padding: 12px 17px;
+
+      cursor: pointer;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      margin: 5px 3px 5px 0;
+
+    }
+
+    .primary { background: #1d4ed8; color: white; }
+
+    .secondary { background: #e2e8f0; color: #172554; }
+
+    .danger { background: #fee2e2; color: #991b1b; }
+
+    .actions { margin-top: 15px; }
+
+    .message { margin-top: 10px; font-weight: bold; }
+
+    .booking {
+
+      border: 1px solid #e2e8f0;
+
+      border-radius: 10px;
+
+      padding: 13px;
+
+      margin-top: 10px;
+
+    }
+
+    .booking h4 { margin: 0 0 8px; }
+
+    .booking p { margin: 5px 0; font-size: 14px; }
+
+    .search { margin-bottom: 12px; }
+
+    .empty { color: #64748b; padding: 12px 0; }
+
+    @media(max-width:600px) {
+
+      .stats { grid-template-columns: 1fr; }
+
+      .form-grid { grid-template-columns: 1fr; }
+
+      body { padding: 10px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <header>
+
+<h2 style="display:flex; align-items:center; justify-content:center; gap:12px;">
+
+  <svg width="48" height="42" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
+
+    <rect x="4" y="13" width="56" height="35" rx="7" fill="#ffffff"/>
+
+    <path d="M17 13 L22 5 H42 L47 13" fill="#ffffff"/>
+
+    <circle cx="32" cy="30" r="13" fill="#1749ad"/>
+
+    <circle cx="32" cy="30" r="8" fill="#26bde8"/>
+
+    <circle cx="32" cy="30" r="4" fill="#172b60"/>
+
+    <circle cx="51" cy="19" r="3" fill="#ffcf32"/>
+
+  </svg>
+
+  Photography Booking Manager
+
+</h2>
+
+    <div>तुमच्या सर्व Photography Bookings एका ठिकाणी</div>
+
+  </header>
+
+  <div class="stats">
+
+    <div class="stat">Total Bookings<strong id="totalBookings">0</strong></div>
+
+    <div class="stat">Total Amount<strong id="totalAmount">₹0</strong></div>
+
+    <div class="stat">Pending Amount<strong id="pendingAmount">₹0</strong></div>
+
+  </div>
+
+  <section class="panel">
+
+    <h3 id="formTitle">➕ New Booking</h3>
+
+    <input type="hidden" id="bookingId">
+
+    <div class="form-grid">
+
+      <label>Client Name
+
+        <input id="clientName"
+
+       type="text"
+
+       list="customerSuggestions"
+
+       placeholder="ग्राहकाचे नाव टाइप करा"
+
+       oninput="suggestCustomerDetails()">
+
+<datalist id="customerSuggestions"></datalist>
+
+      </label>
+
+      <label>Mobile Number
+
+        <input id="mobileNumber" type="tel" maxlength="15" placeholder="मोबाईल नंबर">
+
+      </label>
+
+      <label>Event Type
+
+        <select id="eventType">
+
+          <option value="">Event निवडा</option>
+
+          <option>Mehandi</option>
+
+          <option>Haldi</option>
+
+          <option>Wedding</option>
+
+          <option>Night-Wedding</option>
+
+          <option>Pre Wedding</option>
+
+          <option>Engagement</option>
+
+          <option>Birthday</option>
+
+          <option>Maternity</option>
+
+          <option>Baby Shower</option>
+
+          <option>Other</option>
+
+        </select>
+
+      </label>
+
+      <label>Event Date
+
+        <input id="eventDate" type="date">
+
+      </label>
+
+      <label>Venue
+
+        <input id="venue" type="text" placeholder="कार्यक्रमाचे ठिकाण">
+
+      </label>
+
+      <label>Total Amount (₹)
+
+        <input id="totalAmountInput" type="number" min="0" placeholder="एकूण रक्कम">
+
+      </label>
+
+      <label>Advance Amount (₹)
+
+        <input id="advanceAmount" type="number" min="0" placeholder="ॲडव्हान्स">
+
+      </label>
+
+    </div>
+
+    <div class="actions">
+
+      <button class="primary" onclick="saveBooking()">💾 Save Booking</button>
+
+      <button class="secondary" onclick="resetForm()">Clear</button>
+
+    </div>
+
+    <div id="formMessage" class="message"></div>
+
+  </section>
+
+  <section class="panel">
+
+    <h3>📅 Event Date Availability</h3>
+
+    <label>Select Event Date
+
+      <input id="checkDate" type="date" onchange="checkAvailability()">
+
+    </label>
+
+    <div id="availabilityResult"></div>
+
+  </section>
+
+  <section class="panel">
+
+  <h3>📅 Booking Calendar</h3>
+
+  <div class="calendar-header">
+
+    <button class="secondary"
+
+      onclick="changeMonth(-1)">❮</button>
+
+    <h3 id="calendarMonth" style="margin:0">
+
+      Month
+
+    </h3>
+
+    <button class="secondary"
+
+      onclick="changeMonth(1)">❯</button>
+
+  </div>
+
+  <div class="calendar-grid" id="calendarGrid"></div>
+
+  <div class="calendar-details">
+
+    <h3 id="selectedDateTitle">
+
+      Select Date
+
+    </h3>
+
+    <div id="calendarBookings">
+
+      तारीख निवडा.
+
+    </div>
+
+  </div>
+
+</section>
+
+  <section class="panel">
+
+  <h3>📋 Booking History</h3>
+
+  <button class="primary"
+
+    id="historyToggle"
+
+    onclick="toggleBookingHistory()">
+
+    👁️ Booking History उघडा
+
+  </button>
+
+  <div id="bookingHistoryContent" style="display:none;">
+
+    <input class="search" id="searchInput" type="search"
+
+      placeholder="ग्राहकाचे नाव किंवा मोबाईल नंबर शोधा..."
+
+      oninput="renderBookings()">
+
+    <button class="secondary" onclick="loadBookings()">
+
+      ↻ Refresh
+
+    </button>
+
+    <div id="bookingList">Loading...</div>
+
+  </div>
+
+</section>
+
+</div>
+
+<script>
+
+  let bookings = [];
+
+  function money(value) {
+
+    return "₹" + Number(value || 0).toLocaleString("en-IN");
+
+  }
+
+  function showMessage(message, success) {
+
+    const el = document.getElementById("formMessage");
+
+    el.textContent = message;
+
+    el.style.color = success ? "#15803d" : "#b91c1c";
+
+  }
+
+  function resetForm() {
+
+    document.getElementById("bookingId").value = "";
+
+    document.getElementById("clientName").value = "";
+
+    document.getElementById("mobileNumber").value = "";
+
+    document.getElementById("eventType").value = "";
+
+    document.getElementById("eventDate").value = "";
+
+    document.getElementById("venue").value = "";
+
+    document.getElementById("totalAmountInput").value = "";
+
+    document.getElementById("advanceAmount").value = "";
+
+    document.getElementById("formTitle").textContent = "➕ New Booking";
+
+    showMessage("", true);
+
+  }
+
+  function saveBooking() {
+
+    const data = {
+
+      bookingId: document.getElementById("bookingId").value,
+
+      clientName: document.getElementById("clientName").value,
+
+      mobileNumber: document.getElementById("mobileNumber").value,
+
+      eventType: document.getElementById("eventType").value,
+
+      eventDate: document.getElementById("eventDate").value,
+
+      venue: document.getElementById("venue").value,
+
+      totalAmount: document.getElementById("totalAmountInput").value,
+
+      advanceAmount: document.getElementById("advanceAmount").value
+
+    };
+
+    if (!data.clientName.trim() || !data.mobileNumber.trim() ||
+
+        !data.eventType || !data.eventDate || data.totalAmount === "") {
+
+      showMessage("कृपया आवश्यक माहिती भरा.", false);
+
+      return;
+
+    }
+
+    const total = Number(data.totalAmount);
+
+    const advance = Number(data.advanceAmount || 0);
+
+    if (!Number.isFinite(total) || !Number.isFinite(advance) ||
+
+        total < 0 || advance < 0 || advance > total) {
+
+      showMessage("Total आणि Advance Amount योग्य भरा.", false);
+
+      return;
+
+    }
+
+    const buttons = document.querySelectorAll(".actions button");
+
+    buttons.forEach(b => b.disabled = true);
+
+    showMessage("Saving...", true);
+
+    google.script.run
+
+      .withSuccessHandler(function(result) {
+
+        buttons.forEach(b => b.disabled = false);
+
+        if (result && result.success) {
+
+          showMessage(result.message, true);
+
+          resetForm();
+
+          loadBookings();
+
+        } else {
+
+          showMessage(result ? result.message : "Save failed.", false);
+
+        }
+
+      })
+
+      .withFailureHandler(function(error) {
+
+        buttons.forEach(b => b.disabled = false);
+
+        showMessage(error.message || "Server error.", false);
+
+      })
+
+      .saveBooking(data);
+
+  }
+
+  function suggestCustomerDetails() {
+
+  const name = document.getElementById("clientName").value
+    .trim().toLowerCase();
+
+  const mobileInput = document.getElementById("mobileNumber");
+
+  if (!name) return;
+
+  const customer = bookings.find(b =>
+    String(b.name || "").trim().toLowerCase() === name
+  );
+
+  if (customer) {
+    mobileInput.value = customer.mobile || "";
+  }
+
+}
+
+function updateCustomerSuggestions() {
+
+  const datalist = document.getElementById("customerSuggestions");
+
+  if (!datalist) return;
+
+  datalist.innerHTML = "";
+
+  const uniqueNames = new Set();
+
+  bookings.forEach(b => {
+
+    const name = String(b.name || "").trim();
+
+    if (!name) return;
+
+    const key = name.toLowerCase();
+
+    if (uniqueNames.has(key)) return;
+
+    uniqueNames.add(key);
+
+    const option = document.createElement("option");
+
+    option.value = name;
+
+    datalist.appendChild(option);
+
+  });
+
+}
+
+function toggleBookingHistory() {
+
+  const content = document.getElementById("bookingHistoryContent");
+  const button = document.getElementById("historyToggle");
+
+  if (content.style.display === "none") {
+
+    content.style.display = "block";
+
+    button.textContent = "🙈 Booking History बंद करा";
+
+  } else {
+
+    content.style.display = "none";
+
+    button.textContent = "👁️ Booking History उघडा";
+
+  }
+
+}
+
+  function loadBookings() {
+
+    document.getElementById("bookingList").textContent = "Loading...";
+
+    google.script.run
+
+      .withSuccessHandler(function(data) {
+
+        bookings = Array.isArray(data) ? data : [];
+
+        updateCustomerSuggestions();
+
+        updateStats();
+
+        renderBookings();
+
+        checkAvailability();
+
+        renderCalendar();
+
+      })
+
+      .withFailureHandler(function(error) {
+
+        document.getElementById("bookingList").textContent =
+
+          "Error: " + error.message;
+
+      })
+
+      .getBookings();
+
+  }
+
+  function updateStats() {
+
+    const total = bookings.reduce((sum, b) => sum + Number(b.total || 0), 0);
+
+    const pending = bookings.reduce((sum, b) => sum + Number(b.pending || 0), 0);
+
+    document.getElementById("totalBookings").textContent = bookings.length;
+
+    document.getElementById("totalAmount").textContent = money(total);
+
+    document.getElementById("pendingAmount").textContent = money(pending);
+
+  }
+
+  function renderBookings() {
+
+    const search = document.getElementById("searchInput").value.trim().toLowerCase();
+
+    const filtered = bookings.filter(b =>
+
+      String(b.name || "").toLowerCase().includes(search) ||
+
+      String(b.mobile || "").toLowerCase().includes(search)
+
+    );
+
+    const list = document.getElementById("bookingList");
+
+    list.innerHTML = "";
+
+    if (!filtered.length) {
+
+      list.textContent = "कोणतीही Booking सापडली नाही.";
+
+      return;
+
+    }
+
+    filtered.forEach(b => {
+
+      const card = document.createElement("div");
+
+      card.className = "booking";
+
+      const title = document.createElement("h4");
+
+      title.textContent = b.name || "Customer";
+
+      card.appendChild(title);
+
+      const details = [
+
+        "Booking ID: " + b.bookingId,
+
+        "Mobile: " + b.mobile,
+
+        "Event: " + b.event,
+
+        "Event Date: " + b.date,
+
+        "Venue: " + b.location,
+
+        "Total: " + money(b.total),
+
+        "Advance: " + money(b.advance),
+
+        "Pending: " + money(b.pending)
+
+      ];
+
+      details.forEach(line => {
+
+        const p = document.createElement("p");
+
+        p.textContent = line;
+
+        card.appendChild(p);
+
+      });
+
+      const edit = document.createElement("button");
+
+      edit.className = "primary";
+
+      edit.textContent = "✏️ Edit";
+
+      edit.onclick = () => editBooking(b.bookingId);
+
+      card.appendChild(edit);
+
+      list.appendChild(card);
+
+    });
+
+  }
+
+  function editBooking(id) {
+
+    const b = bookings.find(item => item.bookingId === id);
+
+    if (!b) return;
+
+    document.getElementById("bookingId").value = b.bookingId;
+
+    document.getElementById("clientName").value = b.name;
+
+    document.getElementById("mobileNumber").value = b.mobile;
+
+    document.getElementById("eventType").value = b.event;
+
+    document.getElementById("eventDate").value = b.date;
+
+    document.getElementById("venue").value = b.location;
+
+    document.getElementById("totalAmountInput").value = b.total;
+
+    document.getElementById("advanceAmount").value = b.advance;
+
+    document.getElementById("formTitle").textContent = "✏️ Edit Booking";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  }
+
+  function checkAvailability() {
+
+    const date = document.getElementById("checkDate").value;
+
+    const result = document.getElementById("availabilityResult");
+
+    result.innerHTML = "";
+
+    if (!date) return;
+
+    const matches = bookings.filter(b =>
+
+      b.date === date &&
+
+      b.bookingId !== document.getElementById("bookingId").value
+
+    );
+
+    const p = document.createElement("p");
+
+    p.textContent = matches.length
+
+      ? matches.length + " Booking(s) या तारखेला आहेत."
+
+      : "या तारखेला कोणतीही Booking नाही.";
+
+    result.appendChild(p);
+
+    matches.forEach(b => {
+
+      const line = document.createElement("p");
+
+      line.textContent = b.name + " – " + b.event + " – " + b.location;
+
+      result.appendChild(line);
+
+    });
+
+  }
+
+  // BOOKING CALENDAR
+
+let calendarMonth = new Date();
+let selectedCalendarDate = getTodayDate();
+
+function getTodayDate() {
+
+  const d = new Date();
+
+  return d.getFullYear() + "-" +
+    String(d.getMonth() + 1).padStart(2, "0") + "-" +
+    String(d.getDate()).padStart(2, "0");
+
+}
+
+function changeMonth(direction) {
+
+  calendarMonth = new Date(
+    calendarMonth.getFullYear(),
+    calendarMonth.getMonth() + direction,
+    1
+  );
+
+  selectedCalendarDate =
+    calendarMonth.getFullYear() + "-" +
+    String(calendarMonth.getMonth() + 1).padStart(2, "0") +
+    "-01";
+
+  renderCalendar();
+
+}
+
+function renderCalendar() {
+
+  const grid = document.getElementById("calendarGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const year = calendarMonth.getFullYear();
+  const month = calendarMonth.getMonth();
+
+  document.getElementById("calendarMonth").textContent =
+    calendarMonth.toLocaleDateString("mr-IN", {
+      month: "long",
+      year: "numeric"
+    });
+
+  const weekdays = ["रवि", "सोम", "मंगळ", "बुध", "गुरु", "शुक्र", "शनि"];
+
+  weekdays.forEach(day => {
+    const el = document.createElement("div");
+    el.className = "calendar-weekday";
+    el.textContent = day;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("button");
+    empty.className = "calendar-day";
+    empty.disabled = true;
+    grid.appendChild(empty);
+  }
+
+  for (let day = 1; day <= totalDays; day++) {
+
+    const date =
+      year + "-" +
+      String(month + 1).padStart(2, "0") + "-" +
+      String(day).padStart(2, "0");
+
+    const matches = bookings.filter(b => b.date === date);
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "calendar-day";
+
+    const today = getTodayDate();
+
+if (matches.length > 0) {
+
+  if (date < today) {
+    button.classList.add("past-booked");
+  } else {
+    button.classList.add("booked");
+  }
+
+} else {
+  button.classList.add("available");
+}
+
+if (date === today) {
+  button.classList.add("today");
+}
+
+    if (date === selectedCalendarDate) {
+      button.classList.add("selected");
+    }
+
+    const number = document.createElement("div");
+    number.textContent = day;
+    button.appendChild(number);
+
+    if (matches.length > 0) {
+      const count = document.createElement("small");
+      count.textContent = matches.length + " Booking";
+      button.appendChild(count);
+    }
+
+    // Single Click: Booking Details
+    button.onclick = function() {
+      selectedCalendarDate = date;
+      renderCalendar();
+      showCalendarBookings(date);
+    };
+
+    // Double Click: New Booking
+    button.ondblclick = function() {
+
+      if (matches.length > 0) {
+        alert("या तारखेला आधीच Booking आहे.");
+        return;
+      }
+
+      resetForm();
+
+      document.getElementById("eventDate").value = date;
+
+      document.getElementById("formTitle").textContent =
+        "➕ New Booking - " + date;
+
+      document.getElementById("clientName").focus();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    };
+
+    grid.appendChild(button);
+  }
+
+  showCalendarBookings(selectedCalendarDate);
+}
+
+  function showCalendarBookings(date) {
+
+  const title = document.getElementById("selectedDateTitle");
+  const container = document.getElementById("calendarBookings");
+
+  if (!title || !container) return;
+
+  title.textContent = "📅 " + date + " – Booking Details";
+
+  container.innerHTML = "";
+
+  const matches = bookings.filter(b => b.date === date);
+
+  if (matches.length === 0) {
+
+    container.textContent = "या तारखेला कोणतीही Booking नाही.";
+    return;
+
+  }
+
+  matches.forEach(b => {
+
+    const card = document.createElement("div");
+    card.className = "booking";
+
+    const name = document.createElement("h4");
+    name.textContent = "👤 " + (b.name || "Customer");
+    card.appendChild(name);
+
+    const details = [
+      "📱 Mobile: " + (b.mobile || ""),
+      "🎉 Event: " + (b.event || ""),
+      "📍 Venue: " + (b.location || ""),
+      "💰 Total: " + money(b.total),
+      "💵 Advance: " + money(b.advance),
+      "⌛ Pending: " + money(b.pending)
+    ];
+
+    details.forEach(line => {
+
+      const p = document.createElement("p");
+      p.textContent = line;
+      card.appendChild(p);
+
+    });
+
+    const edit = document.createElement("button");
+    edit.className = "primary";
+    edit.textContent = "✏️ Edit Booking";
+
+    edit.onclick = function() {
+      editBooking(b.bookingId);
+    };
+
+    card.appendChild(edit);
+
+    container.appendChild(card);
+
+  });
+
+}
+  
+  window.addEventListener("load", loadBookings);
+
+</script>
+
+</body>
+
+</html>
