@@ -1097,7 +1097,23 @@ if (date === today) {
   window.addEventListener("load", loadBookings);
 
 </script>
+  
+<link rel="manifest" href="./manifest.json">
 
+<script>
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker.register("./service-worker.js");
+
+  });
+
+}
+
+</script>
+  
 </body>
 
 </html>
