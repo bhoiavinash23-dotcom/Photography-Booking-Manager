@@ -1,0 +1,10 @@
+{
+  "name": "Photography Booking Manager",
+  "short_name": "Photo Booking",
+  "description": "Photography Booking Management App",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#172554"
+}
