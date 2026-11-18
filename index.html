@@ -487,6 +487,69 @@
 
   let bookings = [];
 
+  const GOOGLE_SCRIPT_ID = "1yca6krVpmcvthA_3EK93AtEx9GpGu81OmlDYS5fiphC-cbDfdpVjFy28";
+
+  const GOOGLE_CLIENT_ID = "889106937382-74j4b5umadt90rsmfh0uhnp9e56f4f7u.apps.googleusercontent.com";
+
+  let accessToken = null;
+
+function getGoogleAccessToken() {
+  return new Promise((resolve, reject) => {
+    if (!window.google || !google.accounts || !google.accounts.oauth2) {
+      reject(new Error("Google Sign-In not loaded."));
+      return;
+    }
+
+    const client = google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: "https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/spreadsheets",
+      callback: (response) => {
+        if (response.error) {
+          reject(response);
+          return;
+        }
+
+        accessToken = response.access_token;
+        resolve(accessToken);
+      }
+    });
+
+    client.requestAccessToken({
+      prompt: accessToken ? "" : "consent"
+    });
+  });
+}
+
+  async function callAppsScript(functionName, parameters = []) {
+  const token = await getGoogleAccessToken();
+
+  const response = await fetch(
+    https://script.googleapis.com/v1/scripts/${GOOGLE_SCRIPT_ID}:run,
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        function: functionName,
+        parameters: parameters,
+        devMode: true
+      })
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok || result.error) {
+    throw new Error(
+      result.error?.message || "Google Apps Script API error"
+    );
+  }
+
+  return result.response?.result;
+}
+
   function money(value) {
 
     return "₹" + Number(value || 0).toLocaleString("en-IN");
@@ -579,37 +642,26 @@
 
     showMessage("Saving...", true);
 
-    google.script.run
+   callAppsScript("saveBooking", [data])
+  .then(function(result) {
 
-      .withSuccessHandler(function(result) {
+    buttons.forEach(b => b.disabled = false);
 
-        buttons.forEach(b => b.disabled = false);
+    if (result && result.success) {
+      showMessage(result.message, true);
+      resetForm();
+      loadBookings();
+    } else {
+      showMessage(result ? result.message : "Save failed.", false);
+    }
 
-        if (result && result.success) {
+  })
+  .catch(function(error) {
 
-          showMessage(result.message, true);
+    buttons.forEach(b => b.disabled = false);
+    showMessage(error.message || "Server error.", false);
 
-          resetForm();
-
-          loadBookings();
-
-        } else {
-
-          showMessage(result ? result.message : "Save failed.", false);
-
-        }
-
-      })
-
-      .withFailureHandler(function(error) {
-
-        buttons.forEach(b => b.disabled = false);
-
-        showMessage(error.message || "Server error.", false);
-
-      })
-
-      .saveBooking(data);
+  });
 
   }
 
@@ -689,33 +741,24 @@ function toggleBookingHistory() {
 
     document.getElementById("bookingList").textContent = "Loading...";
 
-    google.script.run
+   callAppsScript("getBookings", [])
+  .then(function(data) {
 
-      .withSuccessHandler(function(data) {
+    bookings = Array.isArray(data) ? data : [];
 
-        bookings = Array.isArray(data) ? data : [];
+    updateCustomerSuggestions();
+    updateStats();
+    renderBookings();
+    checkAvailability();
+    renderCalendar();
 
-        updateCustomerSuggestions();
+  })
+  .catch(function(error) {
 
-        updateStats();
+    document.getElementById("bookingList").textContent =
+      "Error: " + error.message;
 
-        renderBookings();
-
-        checkAvailability();
-
-        renderCalendar();
-
-      })
-
-      .withFailureHandler(function(error) {
-
-        document.getElementById("bookingList").textContent =
-
-          "Error: " + error.message;
-
-      })
-
-      .getBookings();
+  });
 
   }
 
