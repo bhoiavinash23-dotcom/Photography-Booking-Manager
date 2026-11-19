@@ -15,239 +15,268 @@
   <style>
 
 /* Booking Calendar */
+
 .calendar-header {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 10px;
+
   margin-bottom: 15px;
+
 }
 
 .calendar-grid {
+
   display: grid;
+
   grid-template-columns: repeat(7, 1fr);
+
   gap: 5px;
+
 }
 
 .calendar-weekday {
+
   text-align: center;
+
   font-weight: bold;
+
   padding: 8px 0;
+
   font-size: 12px;
+
 }
 
 .calendar-day {
+
   min-height: 65px;
+
   border-radius: 8px;
+
   border: 1px solid #e2e8f0;
+
   padding: 5px;
+
   background: #16a34a;
+
   color: white;
+
   cursor: pointer;
+
   font-weight: bold;
+
 }
 
-.calendar-day.booked {
-  background: #dc2626;
-}
+.calendar-day.booked { background: #dc2626; }
 
-.calendar-day.past-booked {
-  background: #64748b;
-  color: white;
-}
+.calendar-day.past-booked { background: #64748b; color: white; }
 
-.calendar-day.today {
-  background: #eab308;
-  color: #172554;
-}
+.calendar-day.today { background: #eab308; color: #172554; }
 
-.calendar-day.selected {
-  outline: 3px solid #172554;
-}
+.calendar-day.selected { outline: 3px solid #172554; }
 
-.calendar-day:disabled {
-  visibility: hidden;
-}
+.calendar-day:disabled { visibility: hidden; }
 
 .calendar-day small {
+
   display: block;
+
   font-size: 10px;
+
   margin-top: 5px;
+
 }
 
 .calendar-details {
+
   margin-top: 18px;
+
   padding-top: 12px;
+
   border-top: 1px solid #e2e8f0;
+
 }
 
 @media(max-width:600px) {
+
   .calendar-grid { gap: 3px; }
+
   .calendar-day {
+
     min-height: 52px;
+
     padding: 3px;
+
     font-size: 12px;
+
   }
+
   .calendar-day small { font-size: 9px; }
+
 }
 
-    * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-    body {
+body {
 
-      margin: 0;
+  margin: 0;
 
-      padding: 16px;
+  padding: 16px;
 
-      font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 
-      background: #f1f5f9;
+  background: #f1f5f9;
 
-      color: #172554;
+  color: #172554;
 
-    }
+}
 
-    .container { max-width: 950px; margin: auto; }
+.container { max-width: 950px; margin: auto; }
 
-    header {
+header {
 
-      background: #172554;
+  background: #172554;
 
-      color: white;
+  color: white;
 
-      padding: 22px;
+  padding: 22px;
 
-      border-radius: 14px;
+  border-radius: 14px;
 
-      margin-bottom: 18px;
+  margin-bottom: 18px;
 
-      text-align: center;
+  text-align: center;
 
-    }
+}
 
-    header h2 { margin: 0 0 7px; }
+header h2 { margin: 0 0 7px; }
 
-    .stats {
+.stats {
 
-      display: grid;
+  display: grid;
 
-      grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-      gap: 10px;
+  gap: 10px;
 
-      margin-bottom: 18px;
+  margin-bottom: 18px;
 
-    }
+}
 
-    .stat, .panel {
+.stat, .panel {
 
-      background: white;
+  background: white;
 
-      border-radius: 12px;
+  border-radius: 12px;
 
-      padding: 15px;
+  padding: 15px;
 
-      box-shadow: 0 2px 8px #0000000c;
+  box-shadow: 0 2px 8px #0000000c;
 
-    }
+}
 
-    .stat strong { display: block; font-size: 21px; margin-top: 8px; }
+.stat strong { display: block; font-size: 21px; margin-top: 8px; }
 
-    .panel { margin-bottom: 18px; }
+.panel { margin-bottom: 18px; }
 
-    h3 { margin-top: 0; }
+h3 { margin-top: 0; }
 
-    .form-grid {
+.form-grid {
 
-      display: grid;
+  display: grid;
 
-      grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 
-      gap: 13px;
+  gap: 13px;
 
-    }
+}
 
-    label { display: block; font-weight: bold; font-size: 14px; }
+label { display: block; font-weight: bold; font-size: 14px; }
 
-    input, select {
+input, select {
 
-      width: 100%;
+  width: 100%;
 
-      padding: 12px;
+  padding: 12px;
 
-      margin-top: 6px;
+  margin-top: 6px;
 
-      border: 1px solid #cbd5e1;
+  border: 1px solid #cbd5e1;
 
-      border-radius: 8px;
+  border-radius: 8px;
 
-      font-size: 16px;
+  font-size: 16px;
 
-      background: white;
+  background: white;
 
-    }
+}
 
-    button {
+button {
 
-      border: 0;
+  border: 0;
 
-      border-radius: 8px;
+  border-radius: 8px;
 
-      padding: 12px 17px;
+  padding: 12px 17px;
 
-      cursor: pointer;
+  cursor: pointer;
 
-      font-size: 15px;
+  font-size: 15px;
 
-      font-weight: bold;
+  font-weight: bold;
 
-      margin: 5px 3px 5px 0;
+  margin: 5px 3px 5px 0;
 
-    }
+}
 
-    .primary { background: #1d4ed8; color: white; }
+.primary { background: #1d4ed8; color: white; }
 
-    .secondary { background: #e2e8f0; color: #172554; }
+.secondary { background: #e2e8f0; color: #172554; }
 
-    .danger { background: #fee2e2; color: #991b1b; }
+.danger { background: #fee2e2; color: #991b1b; }
 
-    .actions { margin-top: 15px; }
+.actions { margin-top: 15px; }
 
-    .message { margin-top: 10px; font-weight: bold; }
+.message { margin-top: 10px; font-weight: bold; }
 
-    .booking {
+.booking {
 
-      border: 1px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
 
-      border-radius: 10px;
+  border-radius: 10px;
 
-      padding: 13px;
+  padding: 13px;
 
-      margin-top: 10px;
+  margin-top: 10px;
 
-    }
+}
 
-    .booking h4 { margin: 0 0 8px; }
+.booking h4 { margin: 0 0 8px; }
 
-    .booking p { margin: 5px 0; font-size: 14px; }
+.booking p { margin: 5px 0; font-size: 14px; }
 
-    .search { margin-bottom: 12px; }
+.search { margin-bottom: 12px; }
 
-    .empty { color: #64748b; padding: 12px 0; }
+.empty { color: #64748b; padding: 12px 0; }
 
-    @media(max-width:600px) {
+@media(max-width:600px) {
 
-      .stats { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; }
 
-      .form-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
 
-      body { padding: 10px; }
+  body { padding: 10px; }
 
-    }
+}
 
   </style>
 
- <script src="https://accounts.google.com/gsi/client"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
 
 </head>
 
@@ -257,29 +286,31 @@
 
   <header>
 
-<h2 style="display:flex; align-items:center; justify-content:center; gap:12px;">
+    <h2 style="display:flex; align-items:center; justify-content:center; gap:12px;">
 
-  <svg width="48" height="42" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
+      <svg width="48" height="42" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
 
-    <rect x="4" y="13" width="56" height="35" rx="7" fill="#ffffff"/>
+        <rect x="4" y="13" width="56" height="35" rx="7" fill="#ffffff"/>
 
-    <path d="M17 13 L22 5 H42 L47 13" fill="#ffffff"/>
+        <path d="M17 13 L22 5 H42 L47 13" fill="#ffffff"/>
 
-    <circle cx="32" cy="30" r="13" fill="#1749ad"/>
+        <circle cx="32" cy="30" r="13" fill="#1749ad"/>
 
-    <circle cx="32" cy="30" r="8" fill="#26bde8"/>
+        <circle cx="32" cy="30" r="8" fill="#26bde8"/>
 
-    <circle cx="32" cy="30" r="4" fill="#172b60"/>
+        <circle cx="32" cy="30" r="4" fill="#172b60"/>
 
-    <circle cx="51" cy="19" r="3" fill="#ffcf32"/>
+        <circle cx="51" cy="19" r="3" fill="#ffcf32"/>
 
-  </svg>
+      </svg>
 
-  Photography Booking Manager
+      Photography Booking Manager
 
-</h2>
+    </h2>
 
     <div>तुमच्या सर्व Photography Bookings एका ठिकाणी</div>
+
+    <div id="syncStatus" style="margin-top:10px;font-size:13px;font-weight:bold;">डेटा तपासत आहे...</div>
 
   </header>
 
@@ -303,17 +334,13 @@
 
       <label>Client Name
 
-        <input id="clientName"
+        <input id="clientName" type="text" list="customerSuggestions"
 
-       type="text"
+          placeholder="ग्राहकाचे नाव टाइप करा"
 
-       list="customerSuggestions"
+          oninput="suggestCustomerDetails()">
 
-       placeholder="ग्राहकाचे नाव टाइप करा"
-
-       oninput="suggestCustomerDetails()">
-
-<datalist id="customerSuggestions"></datalist>
+        <datalist id="customerSuggestions"></datalist>
 
       </label>
 
@@ -407,79 +434,55 @@
 
   <section class="panel">
 
-  <h3>📅 Booking Calendar</h3>
+    <h3>📅 Booking Calendar</h3>
 
-  <div class="calendar-header">
+    <div class="calendar-header">
 
-    <button class="secondary"
+      <button class="secondary" onclick="changeMonth(-1)">❮</button>
 
-      onclick="changeMonth(-1)">❮</button>
+      <h3 id="calendarMonth" style="margin:0">Month</h3>
 
-    <h3 id="calendarMonth" style="margin:0">
-
-      Month
-
-    </h3>
-
-    <button class="secondary"
-
-      onclick="changeMonth(1)">❯</button>
-
-  </div>
-
-  <div class="calendar-grid" id="calendarGrid"></div>
-
-  <div class="calendar-details">
-
-    <h3 id="selectedDateTitle">
-
-      Select Date
-
-    </h3>
-
-    <div id="calendarBookings">
-
-      तारीख निवडा.
+      <button class="secondary" onclick="changeMonth(1)">❯</button>
 
     </div>
 
-  </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
 
-</section>
+    <div class="calendar-details">
+
+      <h3 id="selectedDateTitle">Select Date</h3>
+
+      <div id="calendarBookings">तारीख निवडा.</div>
+
+    </div>
+
+  </section>
 
   <section class="panel">
 
-  <h3>📋 Booking History</h3>
+    <h3>📋 Booking History</h3>
 
-  <button class="primary"
+    <button class="primary" id="historyToggle" onclick="toggleBookingHistory()">
 
-    id="historyToggle"
-
-    onclick="toggleBookingHistory()">
-
-    👁️ Booking History उघडा
-
-  </button>
-
-  <div id="bookingHistoryContent" style="display:none;">
-
-    <input class="search" id="searchInput" type="search"
-
-      placeholder="ग्राहकाचे नाव किंवा मोबाईल नंबर शोधा..."
-
-      oninput="renderBookings()">
-
-    <button class="secondary" onclick="loadBookings()">
-
-      ↻ Refresh
+      👁️ Booking History उघडा
 
     </button>
 
-    <div id="bookingList">Loading...</div>
+    <div id="bookingHistoryContent" style="display:none;">
 
-  </div>
+      <input class="search" id="searchInput" type="search"
 
-</section>
+        placeholder="ग्राहकाचे नाव किंवा मोबाईल नंबर शोधा..."
+
+        oninput="renderBookings()">
+
+      <button class="secondary" onclick="loadBookings()">↻ Refresh</button>
+
+      <div id="bookingList">Loading...</div>
+
+    </div>
+
+  </section>
 
 </div>
 
@@ -493,69 +496,99 @@
 
   let accessToken = null;
 
-function getGoogleAccessToken() {
-  return new Promise((resolve, reject) => {
+  function getGoogleAccessToken() {
 
-    if (
-      !window.google ||
-      !window.google.accounts ||
-      !window.google.accounts.oauth2
-    ) {
-      reject(new Error("Google Sign-In not loaded."));
-      return;
-    }
+    return new Promise((resolve, reject) => {
 
-    const client = window.google.accounts.oauth2.initTokenClient({
-      client_id: GOOGLE_CLIENT_ID,
+      if (!window.google || !window.google.accounts ||
 
-      scope: "https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/spreadsheets",
+          !window.google.accounts.oauth2) {
 
-      callback: (response) => {
-        if (response.error) {
-          reject(new Error(response.error));
-          return;
+        reject(new Error("Google Sign-In not loaded."));
+
+        return;
+
+      }
+
+      const client = window.google.accounts.oauth2.initTokenClient({
+
+        client_id: GOOGLE_CLIENT_ID,
+
+        scope: "https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/spreadsheets",
+
+        callback: (response) => {
+
+          if (response.error) {
+
+            reject(new Error(response.error));
+
+            return;
+
+          }
+
+          accessToken = response.access_token;
+
+          resolve(accessToken);
+
         }
 
-        accessToken = response.access_token;
-        resolve(accessToken);
-      }
+      });
+
+      client.requestAccessToken({
+
+        prompt: accessToken ? "" : "consent"
+
+      });
+
     });
 
-    client.requestAccessToken({
-      prompt: accessToken ? "" : "consent"
-    });
-
-  });
-}
-  async function callAppsScript(functionName, parameters = []) {
-  const token = await getGoogleAccessToken();
-
-  const response = await fetch(
-    `https://script.googleapis.com/v1/scripts/$DIL0:run`,
-    {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        function: functionName,
-        parameters: parameters,
-        devMode: true
-      })
-    }
-  );
-
-  const result = await response.json();
-
-  if (!response.ok || result.error) {
-    throw new Error(
-      result.error?.message || "Google Apps Script API error"
-    );
   }
 
-  return result.response?.result;
-}
+  async function callAppsScript(functionName, parameters = []) {
+
+    const token = await getGoogleAccessToken();
+
+    const response = await fetch(
+
+      "https://script.googleapis.com/v1/scripts/" + GOOGLE_SCRIPT_ID + ":run",
+
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "Authorization": "Bearer " + token,
+
+          "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+          function: functionName,
+
+          parameters: parameters,
+
+          devMode: true
+
+        })
+
+      }
+
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || result.error) {
+
+      throw new Error(result.error?.message || "Google Apps Script API error");
+
+    }
+
+    return result.response?.result;
+
+  }
 
   function money(value) {
 
@@ -597,11 +630,11 @@ function getGoogleAccessToken() {
 
   }
 
-  function saveBooking() {
+  async function saveBooking() {
 
     const data = {
 
-      bookingId: document.getElementById("bookingId").value,
+      bookingId: document.getElementById("bookingId").value.trim(),
 
       clientName: document.getElementById("clientName").value,
 
@@ -647,217 +680,601 @@ function getGoogleAccessToken() {
 
     buttons.forEach(b => b.disabled = true);
 
-    showMessage("Saving...", true);
+    try {
 
-   callAppsScript("saveBooking", [data])
-  .then(function(result) {
+      await saveBookingLocally(data);
 
-    buttons.forEach(b => b.disabled = false);
-
-    if (result && result.success) {
-      showMessage(result.message, true);
       resetForm();
-      loadBookings();
-    } else {
-      showMessage(result ? result.message : "Save failed.", false);
+
+      renderAllBookings();
+
+      showMessage(
+
+        navigator.onLine
+
+          ? "Booking डिव्हाइसवर सेव्ह झाली. Google Sheet Sync सुरू आहे..."
+
+          : "Booking Offline सेव्ह झाली. इंटरनेट आल्यावर आपोआप Sync होईल.",
+
+        true
+
+      );
+
+      if (navigator.onLine) {
+
+        syncPendingChanges().then(() => loadBookings());
+
+      }
+
+    } catch (error) {
+
+      showMessage("Local Save Error: " + error.message, false);
+
+    } finally {
+
+      buttons.forEach(b => b.disabled = false);
+
     }
-
-  })
-  .catch(function(error) {
-
-    buttons.forEach(b => b.disabled = false);
-    showMessage(error.message || "Server error.", false);
-
-  });
 
   }
 
   function suggestCustomerDetails() {
 
-  const name = document.getElementById("clientName").value
-    .trim().toLowerCase();
+    const name = document.getElementById("clientName").value
 
-  const mobileInput = document.getElementById("mobileNumber");
+      .trim().toLowerCase();
 
-  if (!name) return;
-
-  const customer = bookings.find(b =>
-    String(b.name || "").trim().toLowerCase() === name
-  );
-
-  if (customer) {
-    mobileInput.value = customer.mobile || "";
-  }
-
-}
-
-function updateCustomerSuggestions() {
-
-  const datalist = document.getElementById("customerSuggestions");
-
-  if (!datalist) return;
-
-  datalist.innerHTML = "";
-
-  const uniqueNames = new Set();
-
-  bookings.forEach(b => {
-
-    const name = String(b.name || "").trim();
+    const mobileInput = document.getElementById("mobileNumber");
 
     if (!name) return;
 
-    const key = name.toLowerCase();
+    const customer = bookings.find(b =>
 
-    if (uniqueNames.has(key)) return;
-
-    uniqueNames.add(key);
-
-    const option = document.createElement("option");
-
-    option.value = name;
-
-    datalist.appendChild(option);
-
-  });
-
-}
-
-function toggleBookingHistory() {
-
-  const content = document.getElementById("bookingHistoryContent");
-  const button = document.getElementById("historyToggle");
-
-  if (content.style.display === "none") {
-
-    content.style.display = "block";
-
-    button.textContent = "🙈 Booking History बंद करा";
-
-  } else {
-
-    content.style.display = "none";
-
-    button.textContent = "👁️ Booking History उघडा";
-
-  }
-
-}
-
-  function loadBookings() {
-
-    document.getElementById("bookingList").textContent = "Loading...";
-
-   callAppsScript("getBookings", [])
-  .then(function(data) {
-
-    bookings = Array.isArray(data) ? data : [];
-
-    updateCustomerSuggestions();
-    updateStats();
-    renderBookings();
-    checkAvailability();
-    renderCalendar();
-
-  })
-  .catch(function(error) {
-
-    document.getElementById("bookingList").textContent =
-      "Error: " + error.message;
-
-  });
-
-  }
-
-  function updateStats() {
-
-    const total = bookings.reduce((sum, b) => sum + Number(b.total || 0), 0);
-
-    const pending = bookings.reduce((sum, b) => sum + Number(b.pending || 0), 0);
-
-    document.getElementById("totalBookings").textContent = bookings.length;
-
-    document.getElementById("totalAmount").textContent = money(total);
-
-    document.getElementById("pendingAmount").textContent = money(pending);
-
-  }
-
-  function renderBookings() {
-
-    const search = document.getElementById("searchInput").value.trim().toLowerCase();
-
-    const filtered = bookings.filter(b =>
-
-      String(b.name || "").toLowerCase().includes(search) ||
-
-      String(b.mobile || "").toLowerCase().includes(search)
+      String(b.name || "").trim().toLowerCase() === name
 
     );
 
+    if (customer) mobileInput.value = customer.mobile || "";
+
+  }
+
+  function updateCustomerSuggestions() {
+
+    const datalist = document.getElementById("customerSuggestions");
+
+    if (!datalist) return;
+
+    datalist.innerHTML = "";
+
+    const uniqueNames = new Set();
+
+    bookings.forEach(b => {
+
+      const name = String(b.name || "").trim();
+
+      if (!name) return;
+
+      const key = name.toLowerCase();
+
+      if (uniqueNames.has(key)) return;
+
+      uniqueNames.add(key);
+
+      const option = document.createElement("option");
+
+      option.value = name;
+
+      datalist.appendChild(option);
+
+    });
+
+  }
+
+  function toggleBookingHistory() {
+
+    const content = document.getElementById("bookingHistoryContent");
+
+    const button = document.getElementById("historyToggle");
+
+    if (content.style.display === "none") {
+
+      content.style.display = "block";
+
+      button.textContent = "🙈 Booking History बंद करा";
+
+    } else {
+
+      content.style.display = "none";
+
+      button.textContent = "👁️ Booking History उघडा";
+
+    }
+
+  }
+
+  // OFFLINE DATABASE: प्रत्येक डिव्हाइसवर स्वतंत्र स्थानिक Booking साठवण
+
+  const DB_NAME = "PhotographyBookingOfflineDB";
+
+  const DB_VERSION = 1;
+
+  let dbPromise = null;
+
+  let syncInProgress = false;
+
+  function openOfflineDB() {
+
+    if (dbPromise) return dbPromise;
+
+    dbPromise = new Promise((resolve, reject) => {
+
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+      request.onupgradeneeded = () => {
+
+        const db = request.result;
+
+        if (!db.objectStoreNames.contains("bookings")) {
+
+          db.createObjectStore("bookings", { keyPath: "bookingId" });
+
+        }
+
+        if (!db.objectStoreNames.contains("queue")) {
+
+          db.createObjectStore("queue", { keyPath: "id" });
+
+        }
+
+      };
+
+      request.onsuccess = () => resolve(request.result);
+
+      request.onerror = () => reject(request.error || new Error("IndexedDB उघडता आले नाही."));
+
+    });
+
+    return dbPromise;
+
+  }
+
+  async function dbRequest(storeName, mode, action) {
+
+    const db = await openOfflineDB();
+
+    return new Promise((resolve, reject) => {
+
+      const tx = db.transaction(storeName, mode);
+
+      const store = tx.objectStore(storeName);
+
+      const request = action(store);
+
+      request.onsuccess = () => resolve(request.result);
+
+      request.onerror = () => reject(request.error);
+
+      tx.onabort = () => reject(tx.error || new Error("Database transaction failed."));
+
+    });
+
+  }
+
+  function normalizeBooking(b) {
+
+    const total = Number(b.total ?? b.totalAmount ?? 0) || 0;
+
+    const advance = Number(b.advance ?? b.advanceAmount ?? 0) || 0;
+
+    return {
+
+      bookingId: String(b.bookingId || ""),
+
+      name: String(b.name ?? b.clientName ?? ""),
+
+      mobile: String(b.mobile ?? b.mobileNumber ?? ""),
+
+      event: String(b.event ?? b.eventType ?? ""),
+
+      date: String(b.date ?? b.eventDate ?? ""),
+
+      location: String(b.location ?? b.venue ?? ""),
+
+      total,
+
+      advance,
+
+      pending: Number(b.pending ?? (total - advance)),
+
+      _localOnly: !!b._localOnly
+
+    };
+
+  }
+
+  async function getLocalBookings() {
+
+    const rows = await dbRequest("bookings", "readonly", store => store.getAll());
+
+    return (rows || []).map(normalizeBooking).reverse();
+
+  }
+
+  async function putLocalBooking(booking) {
+
+    return dbRequest("bookings", "readwrite", store => store.put(booking));
+
+  }
+
+  async function removeLocalBooking(id) {
+
+    return dbRequest("bookings", "readwrite", store => store.delete(id));
+
+  }
+
+  async function getQueue() {
+
+    return dbRequest("queue", "readonly", store => store.getAll());
+
+  }
+
+  async function putQueue(item) {
+
+    return dbRequest("queue", "readwrite", store => store.put(item));
+
+  }
+
+  async function removeQueue(id) {
+
+    return dbRequest("queue", "readwrite", store => store.delete(id));
+
+  }
+
+  async function saveBookingLocally(formData) {
+
+    const existingId = formData.bookingId;
+
+    const id = existingId || ("LOCAL-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7));
+
+    const total = Number(formData.totalAmount);
+
+    const advance = Number(formData.advanceAmount || 0);
+
+    const booking = {
+
+      bookingId: id,
+
+      name: formData.clientName.trim(),
+
+      mobile: formData.mobileNumber.trim(),
+
+      event: formData.eventType,
+
+      date: formData.eventDate,
+
+      location: formData.venue.trim(),
+
+      total,
+
+      advance,
+
+      pending: total - advance,
+
+      _localOnly: id.startsWith("LOCAL-")
+
+    };
+
+    await putLocalBooking(booking);
+
+    // एका Booking साठी एकच pending operation ठेवा; वारंवार edit केल्यास शेवटची माहिती Sync होईल.
+
+    await putQueue({
+
+      id,
+
+      type: "save",
+
+      data: {
+
+        bookingId: booking._localOnly ? "" : id,
+
+        clientName: booking.name,
+
+        mobileNumber: booking.mobile,
+
+        eventType: booking.event,
+
+        eventDate: booking.date,
+
+        venue: booking.location,
+
+        totalAmount: booking.total,
+
+        advanceAmount: booking.advance
+
+      }
+
+    });
+
+  }
+
+  async function syncPendingChanges() {
+
+    if (!navigator.onLine || syncInProgress) return;
+
+    syncInProgress = true;
+
+    setSyncStatus("इंटरनेट उपलब्ध – Sync सुरू आहे...", true);
+
+    try {
+
+      const queue = await getQueue();
+
+      for (const item of queue) {
+
+        if (!navigator.onLine) break;
+
+        if (item.type === "save") {
+
+          const result = await callAppsScript("saveBooking", [item.data]);
+
+          if (!result || !result.success) {
+
+            throw new Error(result?.message || "Booking Sync अयशस्वी.");
+
+          }
+
+          const oldId = item.id;
+
+          const serverId = String(result.bookingId || oldId);
+
+          const local = await dbRequest("bookings", "readonly", store => store.get(oldId));
+
+          if (local) {
+
+            if (serverId !== oldId) await removeLocalBooking(oldId);
+
+            local.bookingId = serverId;
+
+            local._localOnly = false;
+
+            await putLocalBooking(local);
+
+          }
+
+          await removeQueue(oldId);
+
+        } else if (item.type === "delete") {
+
+          const result = await callAppsScript("deleteBooking", [item.bookingId]);
+
+          if (!result || !result.success) {
+
+            throw new Error(result?.message || "Delete Sync अयशस्वी.");
+
+          }
+
+          await removeQueue(item.id);
+
+        }
+
+      }
+
+      setSyncStatus(
+
+        (await getQueue()).length
+
+          ? "काही बदल Sync बाकी आहेत."
+
+          : "सर्व Bookings Sync झाल्या आहेत.",
+
+        (await getQueue()).length === 0
+
+      );
+
+    } catch (error) {
+
+      setSyncStatus("Sync बाकी – " + (error.message || "पुन्हा प्रयत्न करा."), false);
+
+    } finally {
+
+      syncInProgress = false;
+
+    }
+
+  }
+
+  function setSyncStatus(message, success) {
+
+    const el = document.getElementById("syncStatus");
+
+    if (el) {
+
+      el.textContent = (navigator.onLine ? "🟢 " : "🔴 ") + message;
+
+      el.style.color = success ? "#bbf7d0" : "#fde68a";
+
+    }
+
+  }
+
+  async function loadBookings() {
+
     const list = document.getElementById("bookingList");
 
-    list.innerHTML = "";
+    if (list) list.textContent = "Loading...";
 
-    if (!filtered.length) {
+    try {
 
-      list.textContent = "कोणतीही Booking सापडली नाही.";
+      // आधी स्थानिक डेटा दाखवा; इंटरनेट नसले तरी History/Calendar लगेच दिसेल.
+
+      bookings = await getLocalBookings();
+
+      renderAllBookings();
+
+      if (!navigator.onLine) {
+
+        setSyncStatus("Offline – या डिव्हाइसवरील सेव्ह केलेल्या Bookings दिसत आहेत.", false);
+
+        return;
+
+      }
+
+      await syncPendingChanges();
+
+      // Server मधील अद्ययावत डेटा मिळवा.
+
+      const serverData = await callAppsScript("getBookings", []);
+
+      const serverBookings = (Array.isArray(serverData) ? serverData : []).map(normalizeBooking);
+
+      const pendingQueue = await getQueue();
+
+      const pendingIds = new Set(pendingQueue.flatMap(q => [q.id, q.bookingId].filter(Boolean)));
+
+      // Server snapshot मधील डेटा स्थानिक DB मध्ये अद्ययावत करा.
+
+      for (const serverBooking of serverBookings) {
+
+        if (!pendingIds.has(serverBooking.bookingId)) {
+
+          await putLocalBooking(serverBooking);
+
+        }
+
+      }
+
+      // Server वरून delete झालेले, पण locally pending नसलेले जुने records काढा.
+
+      const serverIds = new Set(serverBookings.map(b => b.bookingId));
+
+      const localNow = await getLocalBookings();
+
+      for (const localBooking of localNow) {
+
+        if (!localBooking._localOnly &&
+
+            !serverIds.has(localBooking.bookingId) &&
+
+            !pendingIds.has(localBooking.bookingId)) {
+
+          await removeLocalBooking(localBooking.bookingId);
+
+        }
+
+      }
+
+      bookings = await getLocalBookings();
+
+      renderAllBookings();
+
+      setSyncStatus("Online – Google Sheet शी Sync पूर्ण.", true);
+
+    } catch (error) {
+
+      // Online fetch अयशस्वी झाला तरी आधीचा local data वापरात राहतो.
+
+      bookings = await getLocalBookings().catch(() => bookings);
+
+      renderAllBookings();
+
+      setSyncStatus("स्थानिक डेटा उपलब्ध. Server Sync अयशस्वी – " + (error.message || ""), false);
+
+    }
+
+  }
+
+  function renderAllBookings() {
+
+    updateCustomerSuggestions();
+
+    updateStats();
+
+    renderBookings();
+
+    checkAvailability();
+
+    renderCalendar();
+
+  }
+
+  async function deleteBooking(id) {
+
+    const booking = bookings.find(b => b.bookingId === id);
+
+    if (!booking) {
+
+      alert("Booking सापडली नाही.");
 
       return;
 
     }
 
-    filtered.forEach(b => {
+    if (!confirm("तुम्हाला " + booking.name + " यांची Booking कायमची Delete करायची आहे का?")) return;
 
-      const card = document.createElement("div");
+    try {
 
-      card.className = "booking";
+      await removeLocalBooking(id);
 
-      const title = document.createElement("h4");
+      await removeQueue(id);
 
-      title.textContent = b.name || "Customer";
+      if (!String(id).startsWith("LOCAL-")) {
 
-      card.appendChild(title);
+        await putQueue({ id: "DELETE-" + id, type: "delete", bookingId: id });
 
-      const details = [
+      }
 
-        "Booking ID: " + b.bookingId,
+      bookings = await getLocalBookings();
 
-        "Mobile: " + b.mobile,
+      renderAllBookings();
 
-        "Event: " + b.event,
+      if (navigator.onLine) {
 
-        "Event Date: " + b.date,
+        await syncPendingChanges();
 
-        "Venue: " + b.location,
+        await loadBookings();
 
-        "Total: " + money(b.total),
+      } else {
 
-        "Advance: " + money(b.advance),
+        setSyncStatus("Delete Offline सेव्ह झाले. इंटरनेट आल्यावर Sync होईल.", false);
 
-        "Pending: " + money(b.pending)
+      }
 
-      ];
+    } catch (error) {
 
-      details.forEach(line => {
+      alert("Delete Error: " + error.message);
 
-        const p = document.createElement("p");
+    }
 
-        p.textContent = line;
+  }
 
-        card.appendChild(p);
+  window.addEventListener("online", () => {
 
-      });
+    setSyncStatus("इंटरनेट परत आले – Sync सुरू आहे...", true);
 
-      const edit = document.createElement("button");
+    syncPendingChanges().then(loadBookings);
 
-      edit.className = "primary";
+  });
 
-      edit.textContent = "✏️ Edit";
+  window.addEventListener("offline", () => {
 
-      edit.onclick = () => editBooking(b.bookingId);
+    setSyncStatus("Offline – स्थानिक Booking सुविधा सुरू आहे.", false);
+
+  });
+
+  edit.onclick = () => editBooking(b.bookingId);
 
       card.appendChild(edit);
+
+      const del = document.createElement("button");
+
+      del.className = "danger";
+
+      del.textContent = "🗑️ Delete";
+
+      del.onclick = () => deleteBooking(b.bookingId);
+
+      card.appendChild(del);
 
       list.appendChild(card);
 
@@ -935,221 +1352,296 @@ function toggleBookingHistory() {
 
   // BOOKING CALENDAR
 
-let calendarMonth = new Date();
-let selectedCalendarDate = getTodayDate();
+  let calendarMonth = new Date();
 
-function getTodayDate() {
+  let selectedCalendarDate = getTodayDate();
 
-  const d = new Date();
+  function getTodayDate() {
 
-  return d.getFullYear() + "-" +
-    String(d.getMonth() + 1).padStart(2, "0") + "-" +
-    String(d.getDate()).padStart(2, "0");
+    const d = new Date();
 
-}
+    return d.getFullYear() + "-" +
 
-function changeMonth(direction) {
+      String(d.getMonth() + 1).padStart(2, "0") + "-" +
 
-  calendarMonth = new Date(
-    calendarMonth.getFullYear(),
-    calendarMonth.getMonth() + direction,
-    1
-  );
+      String(d.getDate()).padStart(2, "0");
 
-  selectedCalendarDate =
-    calendarMonth.getFullYear() + "-" +
-    String(calendarMonth.getMonth() + 1).padStart(2, "0") +
-    "-01";
-
-  renderCalendar();
-
-}
-
-function renderCalendar() {
-
-  const grid = document.getElementById("calendarGrid");
-
-  if (!grid) return;
-
-  grid.innerHTML = "";
-
-  const year = calendarMonth.getFullYear();
-  const month = calendarMonth.getMonth();
-
-  document.getElementById("calendarMonth").textContent =
-    calendarMonth.toLocaleDateString("mr-IN", {
-      month: "long",
-      year: "numeric"
-    });
-
-  const weekdays = ["रवि", "सोम", "मंगळ", "बुध", "गुरु", "शुक्र", "शनि"];
-
-  weekdays.forEach(day => {
-    const el = document.createElement("div");
-    el.className = "calendar-weekday";
-    el.textContent = day;
-    grid.appendChild(el);
-  });
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const totalDays = new Date(year, month + 1, 0).getDate();
-
-  for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement("button");
-    empty.className = "calendar-day";
-    empty.disabled = true;
-    grid.appendChild(empty);
   }
 
-  for (let day = 1; day <= totalDays; day++) {
+  function changeMonth(direction) {
 
-    const date =
-      year + "-" +
-      String(month + 1).padStart(2, "0") + "-" +
-      String(day).padStart(2, "0");
+    calendarMonth = new Date(
 
-    const matches = bookings.filter(b => b.date === date);
+      calendarMonth.getFullYear(),
 
-    const button = document.createElement("button");
+      calendarMonth.getMonth() + direction,
 
-    button.type = "button";
-    button.className = "calendar-day";
+      1
 
-    const today = getTodayDate();
+    );
 
-if (matches.length > 0) {
+    selectedCalendarDate =
 
-  if (date < today) {
-    button.classList.add("past-booked");
-  } else {
-    button.classList.add("booked");
+      calendarMonth.getFullYear() + "-" +
+
+      String(calendarMonth.getMonth() + 1).padStart(2, "0") +
+
+      "-01";
+
+    renderCalendar();
+
   }
 
-} else {
-  button.classList.add("available");
-}
+  function renderCalendar() {
 
-if (date === today) {
-  button.classList.add("today");
-}
+    const grid = document.getElementById("calendarGrid");
 
-    if (date === selectedCalendarDate) {
-      button.classList.add("selected");
-    }
+    if (!grid) return;
 
-    const number = document.createElement("div");
-    number.textContent = day;
-    button.appendChild(number);
+    grid.innerHTML = "";
 
-    if (matches.length > 0) {
-      const count = document.createElement("small");
-      count.textContent = matches.length + " Booking";
-      button.appendChild(count);
-    }
+    const year = calendarMonth.getFullYear();
 
-    // Single Click: Booking Details
-    button.onclick = function() {
-      selectedCalendarDate = date;
-      renderCalendar();
-      showCalendarBookings(date);
-    };
+    const month = calendarMonth.getMonth();
 
-    // Double Click: New Booking
-    button.ondblclick = function() {
+    document.getElementById("calendarMonth").textContent =
 
-      if (matches.length > 0) {
-        alert("या तारखेला आधीच Booking आहे.");
-        return;
-      }
+      calendarMonth.toLocaleDateString("mr-IN", {
 
-      resetForm();
+        month: "long",
 
-      document.getElementById("eventDate").value = date;
+        year: "numeric"
 
-      document.getElementById("formTitle").textContent =
-        "➕ New Booking - " + date;
-
-      document.getElementById("clientName").focus();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
       });
 
-    };
+    const weekdays = ["रवि", "सोम", "मंगळ", "बुध", "गुरु", "शुक्र", "शनि"];
 
-    grid.appendChild(button);
+    weekdays.forEach(day => {
+
+      const el = document.createElement("div");
+
+      el.className = "calendar-weekday";
+
+      el.textContent = day;
+
+      grid.appendChild(el);
+
+    });
+
+    const firstDay = new Date(year, month, 1).getDay();
+
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+
+      const empty = document.createElement("button");
+
+      empty.className = "calendar-day";
+
+      empty.disabled = true;
+
+      grid.appendChild(empty);
+
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+
+      const date =
+
+        year + "-" +
+
+        String(month + 1).padStart(2, "0") + "-" +
+
+        String(day).padStart(2, "0");
+
+      const matches = bookings.filter(b => b.date === date);
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+
+      button.className = "calendar-day";
+
+      const today = getTodayDate();
+
+      if (matches.length > 0) {
+
+        if (date < today) {
+
+          button.classList.add("past-booked");
+
+        } else {
+
+          button.classList.add("booked");
+
+        }
+
+      } else {
+
+        button.classList.add("available");
+
+      }
+
+      if (date === today) button.classList.add("today");
+
+      if (date === selectedCalendarDate) button.classList.add("selected");
+
+      const number = document.createElement("div");
+
+      number.textContent = day;
+
+      button.appendChild(number);
+
+      if (matches.length > 0) {
+
+        const count = document.createElement("small");
+
+        count.textContent = matches.length + " Booking";
+
+        button.appendChild(count);
+
+      }
+
+      // Single Click: Booking Details
+
+      button.onclick = function() {
+
+        selectedCalendarDate = date;
+
+        renderCalendar();
+
+        showCalendarBookings(date);
+
+      };
+
+      // Double Click: New Booking
+
+      button.ondblclick = function() {
+
+        if (matches.length > 0) {
+
+          alert("या तारखेला आधीच Booking आहे.");
+
+          return;
+
+        }
+
+        resetForm();
+
+        document.getElementById("eventDate").value = date;
+
+        document.getElementById("formTitle").textContent =
+
+          "➕ New Booking - " + date;
+
+        document.getElementById("clientName").focus();
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+      };
+
+      grid.appendChild(button);
+
+    }
+
+    showCalendarBookings(selectedCalendarDate);
+
   }
-
-  showCalendarBookings(selectedCalendarDate);
-}
 
   function showCalendarBookings(date) {
 
-  const title = document.getElementById("selectedDateTitle");
-  const container = document.getElementById("calendarBookings");
+    const title = document.getElementById("selectedDateTitle");
 
-  if (!title || !container) return;
+    const container = document.getElementById("calendarBookings");
 
-  title.textContent = "📅 " + date + " – Booking Details";
+    if (!title || !container) return;
 
-  container.innerHTML = "";
+    title.textContent = "📅 " + date + " – Booking Details";
 
-  const matches = bookings.filter(b => b.date === date);
+    container.innerHTML = "";
 
-  if (matches.length === 0) {
+    const matches = bookings.filter(b => b.date === date);
 
-    container.textContent = "या तारखेला कोणतीही Booking नाही.";
-    return;
+    if (matches.length === 0) {
 
-  }
+      container.textContent = "या तारखेला कोणतीही Booking नाही.";
 
-  matches.forEach(b => {
+      return;
 
-    const card = document.createElement("div");
-    card.className = "booking";
+    }
 
-    const name = document.createElement("h4");
-    name.textContent = "👤 " + (b.name || "Customer");
-    card.appendChild(name);
+    matches.forEach(b => {
 
-    const details = [
-      "📱 Mobile: " + (b.mobile || ""),
-      "🎉 Event: " + (b.event || ""),
-      "📍 Venue: " + (b.location || ""),
-      "💰 Total: " + money(b.total),
-      "💵 Advance: " + money(b.advance),
-      "⌛ Pending: " + money(b.pending)
-    ];
+      const card = document.createElement("div");
 
-    details.forEach(line => {
+      card.className = "booking";
 
-      const p = document.createElement("p");
-      p.textContent = line;
-      card.appendChild(p);
+      const name = document.createElement("h4");
+
+      name.textContent = "👤 " + (b.name || "Customer");
+
+      card.appendChild(name);
+
+      const details = [
+
+        "📱 Mobile: " + (b.mobile || ""),
+
+        "🎉 Event: " + (b.event || ""),
+
+        "📍 Venue: " + (b.location || ""),
+
+        "💰 Total: " + money(b.total),
+
+        "💵 Advance: " + money(b.advance),
+
+        "⌛ Pending: " + money(b.pending)
+
+      ];
+
+      details.forEach(line => {
+
+        const p = document.createElement("p");
+
+        p.textContent = line;
+
+        card.appendChild(p);
+
+      });
+
+      const edit = document.createElement("button");
+
+      edit.className = "primary";
+
+      edit.textContent = "✏️ Edit Booking";
+
+      edit.onclick = function() {
+
+        editBooking(b.bookingId);
+
+      };
+
+      card.appendChild(edit);
+
+      const del = document.createElement("button");
+
+      del.className = "danger";
+
+      del.textContent = "🗑️ Delete Booking";
+
+      del.onclick = () => deleteBooking(b.bookingId);
+
+      card.appendChild(del);
+
+      container.appendChild(card);
 
     });
 
-    const edit = document.createElement("button");
-    edit.className = "primary";
-    edit.textContent = "✏️ Edit Booking";
+  }
 
-    edit.onclick = function() {
-      editBooking(b.bookingId);
-    };
-
-    card.appendChild(edit);
-
-    container.appendChild(card);
-
-  });
-
-}
-  
   window.addEventListener("load", loadBookings);
 
 </script>
-  
+
 <link rel="manifest" href="./manifest.json">
 
 <script>
@@ -1165,7 +1657,7 @@ if ("serviceWorker" in navigator) {
 }
 
 </script>
-  
+
 </body>
 
 </html>
