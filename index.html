@@ -247,7 +247,7 @@
 
   </style>
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+ <script src="https://accounts.google.com/gsi/client"></script>
 
 </head>
 
@@ -495,17 +495,24 @@
 
 function getGoogleAccessToken() {
   return new Promise((resolve, reject) => {
-    if (!window.google || !google.accounts || !google.accounts.oauth2) {
+
+    if (
+      !window.google ||
+      !window.google.accounts ||
+      !window.google.accounts.oauth2
+    ) {
       reject(new Error("Google Sign-In not loaded."));
       return;
     }
 
-    const client = google.accounts.oauth2.initTokenClient({
+    const client = window.google.accounts.oauth2.initTokenClient({
       client_id: GOOGLE_CLIENT_ID,
+
       scope: "https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/spreadsheets",
+
       callback: (response) => {
         if (response.error) {
-          reject(response);
+          reject(new Error(response.error));
           return;
         }
 
@@ -517,9 +524,9 @@ function getGoogleAccessToken() {
     client.requestAccessToken({
       prompt: accessToken ? "" : "consent"
     });
+
   });
 }
-
   async function callAppsScript(functionName, parameters = []) {
   const token = await getGoogleAccessToken();
 
